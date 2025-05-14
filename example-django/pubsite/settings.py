@@ -123,3 +123,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 PUBCRANK_DIR = BASE_DIR / 'pubdir'
+PUBCRANK_THEME = 'plain'
