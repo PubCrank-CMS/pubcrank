@@ -38,14 +38,19 @@ def build(
   django_dir: Path = DjangoOption,
   settings: str = SettingsOption,
   verbose: bool = VerboseOption,
+  outdir: Path = Option(Path('output'), "-o", "--output", help="output directory", raise_path_does_not_exist=False)
 ):
   if not config.exists():
     eprint("Config file does not exist.")
     sys.exit(1)
 
+  if outdir.exists() and not outdir.is_dir():
+    eprint("Output must be a directory.")
+    sys.exit(1)
+
   setup_django(django_dir, settings)
   crank = Crank(config)
-  crank.build(verbose=verbose)
+  crank.build(outdir, verbose=verbose)
 
 if __name__ == '__main__':
   cli.run()

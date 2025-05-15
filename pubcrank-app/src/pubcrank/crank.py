@@ -40,15 +40,13 @@ class Crank:
     if verbose:
       console.print(message)
 
-  def build(self, verbose=False):
-    out_dir = self.dir / "output"
-
+  def build(self, outdir, verbose=False):
     for root, dirs, files in self.content_dir.walk(on_error=self.no_access):
       for f in files:
         file = root / f
         if file.suffix.lower() == '.md':
           relpath = file.relative_to(self.content_dir)
-          outpath = out_dir / relpath
+          outpath = outdir / relpath
           outpath = outpath.with_suffix('.html')
           self.log(f"Building: {file} -> {outpath}", verbose)
           self.generate(file, outpath)
@@ -77,3 +75,5 @@ class Crank:
     html = template.render(context)
 
     dest.parent.mkdir(parents=True, exist_ok=True)
+    with dest.open('w') as fh:
+      fh.write(html)

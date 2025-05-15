@@ -16,9 +16,9 @@ distribution = false
 
 [tool.pdm.scripts]
 _.env_file = ".env"
-pubcrank = "python ../pubcrank/src/pubcrank/bin.py"
+pubcrank = "python ../pubcrank-app/src/pubcrank/bin.py"
 
 [tool.pdm.dev-dependencies]
 dev = [
-    "-e file:///${PROJECT_ROOT}/../pubcrank#egg=pubcrank",
+    "-e file:///${PROJECT_ROOT}/../pubcrank-app#egg=pubcrank",
 ]
