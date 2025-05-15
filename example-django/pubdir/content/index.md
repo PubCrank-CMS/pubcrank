@@ -2,6 +2,7 @@
 {
   title: Home
   description: this is the page description
+  template: page.html
 }
 ---
 

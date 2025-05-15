@@ -1,5 +1,6 @@
-import hjson
+from pathlib import Path
 
+import hjson
 from rich.console import Console
 
 econsole = Console(stderr=True, style="bold red")
@@ -24,7 +25,18 @@ class Crank:
   def no_access(self, error):
     econsole.print(f'Can not access: {error.filename}')
 
-  def build(self):
+  def log(self, message, verbose=False):
+    if verbose:
+      console.print(message)
+
+  def build(self, verbose=False):
+    out_dir = self.dir / "output"
+
     for root, dirs, files in self.content_dir.walk(on_error=self.no_access):
-      for file in files:
-        print(file)
+      for f in files:
+        file = root / f
+        if file.suffix.lower() == '.md':
+          relpath = file.relative_to(self.content_dir)
+          outpath = out_dir / relpath
+          outpath = outpath.with_suffix('.html')
+          self.log(f"{file} -> {outpath}", verbose)
