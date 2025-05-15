@@ -13,3 +13,12 @@ license = {text = "BSD 3-Clause"}
 
 [tool.pdm]
 distribution = false
+
+[tool.pdm.scripts]
+_.env_file = ".env"
+pubcrank = "python ../pubcrank/src/pubcrank/bin.py"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "-e file:///${PROJECT_ROOT}/../pubcrank#egg=pubcrank",
+]
