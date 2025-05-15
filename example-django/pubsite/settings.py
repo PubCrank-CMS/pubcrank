@@ -125,5 +125,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 from pubcrank.settings import setup_pubcrank
 
 setup_pubcrank(globals(), BASE_DIR / 'pubdir', 'plain')
-print(PUBCRANK_DIR)
-print(PUBCRANK_THEME)

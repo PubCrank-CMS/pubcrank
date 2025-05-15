@@ -14,3 +14,10 @@ This is my about us page. Is it awesome?
 - spaghetti
 - meatballs
 - brisket
+
+## Code
+
+```python
+def narf(arg, kwarg1=None):
+  print("Yo")
+```

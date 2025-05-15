@@ -2,9 +2,11 @@ from copy import deepcopy
 from pathlib import Path
 
 from django.template import Context, Template, engines
+from django.conf import settings
 
 import frontmatter
 import hjson
+import markdown2
 from rich.console import Console
 
 from pubcrank.lib.frontmatter import HJSONHandler
@@ -40,6 +42,9 @@ class Crank:
     if verbose:
       console.print(message)
 
+  def success(self, message):
+    console.print(message, style="green")
+
   def build(self, outdir, verbose=False):
     for root, dirs, files in self.content_dir.walk(on_error=self.no_access):
       for f in files:
@@ -50,6 +55,8 @@ class Crank:
           outpath = outpath.with_suffix('.html')
           self.log(f"Building: {file} -> {outpath}", verbose)
           self.generate(file, outpath)
+
+      self.success(f"Successful build at: {outdir.resolve()}")
 
   def get_template(self, tpl_file):
     if tpl_file not in self.tpl_cache:
@@ -68,7 +75,9 @@ class Crank:
 
     template = self.get_template(metadata.get('template', 'page.html'))
     context = deepcopy(self.config)
+
     page = metadata
+    content = markdown2.markdown(content, extras=settings.PUBCRANK_MD_EXTRAS)
     page.update({'body': content})
     context.update({'page': page})
     context = Context(context)
