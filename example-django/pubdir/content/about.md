@@ -1,10 +1,8 @@
----
 {
   title: About Us
   description: this is the about us description
   template: page.html
 }
----
 
 ## Details
 

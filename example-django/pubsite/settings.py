@@ -122,5 +122,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-PUBCRANK_DIR = BASE_DIR / 'pubdir'
-PUBCRANK_THEME = 'plain'
+from pubcrank.settings import setup_pubcrank
+
+setup_pubcrank(globals(), BASE_DIR / 'pubdir', 'plain')
+print(PUBCRANK_DIR)
+print(PUBCRANK_THEME)

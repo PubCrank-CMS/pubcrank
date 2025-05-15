@@ -1,7 +1,13 @@
+from copy import deepcopy
 from pathlib import Path
 
+from django.template import Context, Template, engines
+
+import frontmatter
 import hjson
 from rich.console import Console
+
+from pubcrank.lib.frontmatter import HJSONHandler
 
 econsole = Console(stderr=True, style="bold red")
 console = Console()
@@ -19,8 +25,13 @@ class Crank:
     self.assets_dir = self.dir / "assets"
 
     self.theme_dir = self.dir / "themes" / self.config["theme"]
-    self.theme_templates_dir = self.theme_dir / "templates"
     self.theme_assets_dir = self.theme_dir / "assets"
+
+    self.tpl_cache = {}
+    self.tpl_engine = None
+    for e in engines.all():
+      if e.name == 'pubcrank':
+        self.tpl_engine = e.engine
 
   def no_access(self, error):
     econsole.print(f'Can not access: {error.filename}')
@@ -39,4 +50,30 @@ class Crank:
           relpath = file.relative_to(self.content_dir)
           outpath = out_dir / relpath
           outpath = outpath.with_suffix('.html')
-          self.log(f"{file} -> {outpath}", verbose)
+          self.log(f"Building: {file} -> {outpath}", verbose)
+          self.generate(file, outpath)
+
+  def get_template(self, tpl_file):
+    if tpl_file not in self.tpl_cache:
+      tpl_path = self.templates_dir / tpl_file
+      if not tpl_path.exists():
+        tpl_path = self.theme_dir / tpl_file
+
+      with tpl_path.open('r') as fh:
+        self.tpl_cache[tpl_file] = Template(fh.read(), engine=self.tpl_engine)
+
+    return self.tpl_cache[tpl_file]
+
+  def generate(self, source, dest):
+    with source.open('r') as fh:
+      metadata, content = frontmatter.parse(fh.read(), handler=HJSONHandler())
+
+    template = self.get_template(metadata.get('template', 'page.html'))
+    context = deepcopy(self.config)
+    page = metadata
+    page.update({'body': content})
+    context.update({'page': page})
+    context = Context(context)
+    html = template.render(context)
+
+    dest.parent.mkdir(parents=True, exist_ok=True)
