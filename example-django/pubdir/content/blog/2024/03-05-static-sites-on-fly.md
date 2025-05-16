@@ -9,7 +9,7 @@
   cover: /img/server-monolith.jpg
   description: A better way to serve static content on Fly.io
   draft: false
-  template: post
+  template: post.html
 }
 
 

@@ -7,6 +7,7 @@
   ]
   canonical_url: https://hackernoon.com/have-your-privacy-cake-on-android-and-eat-it-too-db1f37b5
   cover: /img/android.jpg
+  template: post.html
 }
 
 Recently I've had the goal to reduce my usage of big tech products and thus reduce the tracking and influence they have in my life. One of the biggest areas to reduce is the phone. Modern Android has all kinds of hooks so that apps and Google services can track you. And it is almost impossible for you to turn off these services and still have the ability to use everyday applications.

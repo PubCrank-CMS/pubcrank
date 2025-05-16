@@ -1,5 +1,5 @@
 {
-  template: post
+  template: post.html
   draft: false
   title: SQLite the New Hotness?! 🤔
   date: 2024-03-21T05:00:00.000Z

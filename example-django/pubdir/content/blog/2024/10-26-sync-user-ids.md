@@ -1,5 +1,5 @@
 {
-  template: post
+  template: post.html
   draft: false
   categories:
   [

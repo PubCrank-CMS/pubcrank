@@ -1,0 +1,25 @@
+{
+  fields: [
+    {
+      name: title
+      type: forms.CharField
+      kwargs: {
+        max_length: 65
+      }
+    }
+    {
+      name: description
+      type: forms.CharField
+      kwargs: {
+        max_length: 150
+      }
+    }
+    {
+      name: body
+      type: forms.CharField
+      kwargs: {
+        widget: forms.Textarea
+      }
+    }
+  ]
+}

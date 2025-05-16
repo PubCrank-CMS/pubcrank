@@ -9,6 +9,7 @@
     pactl
   ]
   cover: /img/pulseaudio.png
+  template: post.html
 }
 
 

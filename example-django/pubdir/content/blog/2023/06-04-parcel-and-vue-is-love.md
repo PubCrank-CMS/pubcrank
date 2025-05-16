@@ -10,6 +10,7 @@
   ]
   cover: /img/parcel-vue.jpg
   canonical_url: https://hackernoon.com/using-vue-3-with-parcel-js
+  template: post.html
 }
 
 

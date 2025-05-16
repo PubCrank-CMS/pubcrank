@@ -7,6 +7,7 @@
   ]
   canonical_url: https://hackernoon.com/voice-assistants-are-the-modern-day-groom-of-the-stool-gts1p4zro
   cover: /img/groom.jpg
+  template: post.html
 }
 All the rage in the news lately has been the revelation that voice assistants are listening and recording many of our conversations and employees and contractors of these companies can access these recordings. And while accessing these recordings can be anonymous, happens to legitimately improve the service, and happens to a very low percentage of recordings, it still makes the most logical of us flinch. Why is that?
 

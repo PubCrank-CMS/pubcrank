@@ -6,6 +6,7 @@
     tires,
   ]
   cover: biking/biker.jpeg
+  template: post.html
 }
 
 A while ago I decided to take the plunge and build my own bike. I went with a titanium frame and electronic gear shifting. Really amazing stuff! I've been tweaking things as I go along trying to both improve my speed but also make a more comfortable ride. Of all the things I've tried, even from going to a lighter frame and better gearing, the biggest bang for my buck in terms of speed has been changing tires. This is my journey of trying out different tire types.

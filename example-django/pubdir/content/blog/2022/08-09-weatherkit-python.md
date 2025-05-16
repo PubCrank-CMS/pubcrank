@@ -7,6 +7,7 @@
     weatherkit
     weather api
   ]
+  template: post.html
 }
 
 

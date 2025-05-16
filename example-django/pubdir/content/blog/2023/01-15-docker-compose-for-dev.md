@@ -9,6 +9,7 @@
   ]
   cover: /img/docker-compose.jpg
   canonical_url: https://hackernoon.com/using-docker-compose-for-development-without-going-crazy
+  template: post.html
 }
 
 

@@ -9,6 +9,7 @@
     cli
   ]
   cover: /img/Tmux.png
+  template: post.html
 }
 
 

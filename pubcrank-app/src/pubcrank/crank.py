@@ -56,7 +56,7 @@ class Crank:
           self.log(f"Building: {file} -> {outpath}", verbose)
           self.generate(file, outpath)
 
-      self.success(f"Successful build at: {outdir.resolve()}")
+    self.success(f"Successful build at: {outdir.resolve()}")
 
   def get_template(self, tpl_file):
     if tpl_file not in self.tpl_cache:

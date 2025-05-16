@@ -9,6 +9,7 @@
   ]
   cover: /img/graphql.png
   canonical_url: https://hackernoon.com/making-graphql-queries-in-python-like-a-boss
+  template: post.html
 }
 
 
