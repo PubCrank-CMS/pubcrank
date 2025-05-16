@@ -29,6 +29,7 @@ class Crank:
     self.theme_dir = self.dir / "themes" / self.config["theme"]
     self.theme_assets_dir = self.theme_dir / "assets"
 
+    self.content_cache = {}
     self.tpl_cache = {}
     self.tpl_engine = None
     for e in engines.all():
@@ -69,12 +70,25 @@ class Crank:
 
     return self.tpl_cache[tpl_file]
 
-  def generate(self, source, dest):
-    with source.open('r') as fh:
+  def open_content(self, file):
+    key = file.resolve()
+    if key in self.content_cache:
+      return self.content_cache[key]
+
+    with file.open('r') as fh:
       metadata, content = frontmatter.parse(fh.read(), handler=HJSONHandler())
+
+    self.content_cache[key] = (metadata, content)
+    return self.content_cache[key]
+
+  def generate(self, src, dest):
+    metadata, content = self.open_content(src)
 
     template = self.get_template(metadata.get('template', 'page.html'))
     context = deepcopy(self.config)
+    context['src'] = src
+    context['dest'] = dest
+    context['crank'] = self
 
     page = metadata
     content = markdown2.markdown(content, extras=settings.PUBCRANK_MD_EXTRAS)

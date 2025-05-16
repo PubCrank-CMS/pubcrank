@@ -6,6 +6,6 @@
 {{ page.body|safe }}
 </div>
 <div class="posts">
-  {% list-pages . recursive=True %}
+  {% list_pages "." %}
 </div>
 {% endblock %}
