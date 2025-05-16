@@ -1,13 +1,16 @@
----
-title: Installing Tmux plugins on Ubuntu
-date: 2023-08-14 00:00:00 -0600
-categories:
-  - tmux
-  - terminal
-  - command line
-  - cli
-cover: /img/Tmux.png
----
+{
+  title: Installing Tmux plugins on Ubuntu
+  date: 2023-08-14 00:00:00 -0600
+  categories:
+  [
+    tmux
+    terminal
+    command line
+    cli
+  ]
+  cover: /img/Tmux.png
+}
+
 
 I learned about Tmux plugins this weekend and they are pretty awesome! However, I didn't find the correct instructions for setting them up quickly in Ubuntu. Most of the directions I found centered around installing manaully from Github. Below I listed the instructions for Ubuntu/Debian installation.
 

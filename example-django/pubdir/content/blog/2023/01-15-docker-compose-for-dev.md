@@ -1,13 +1,16 @@
----
-title: Using Docker Compose for Development without Going Crazy
-date: 2023-01-15 00:00:00 -0600
-categories:
-  - development
-  - docker compose
-  - DX
-cover: /img/docker-compose.jpg
-canonical_url: https://hackernoon.com/using-docker-compose-for-development-without-going-crazy
----
+{
+  title: Using Docker Compose for Development without Going Crazy
+  date: 2023-01-15 00:00:00 -0600
+  categories:
+  [
+    development
+    docker compose
+    DX
+  ]
+  cover: /img/docker-compose.jpg
+  canonical_url: https://hackernoon.com/using-docker-compose-for-development-without-going-crazy
+}
+
 
 Docker Compose is a great tool for development but I've never found a good example of how to use it for an ideal development workflow. Containers are immutable and thus by default are not an ideal development environment because development is fundamentally about changing things and then running the change. Most Docker Compose blogs talk about mounting your code repository as a volume which gets you around the immutability problem and mapping a port, but they don't go much past that. There are many more little tricks you can do to make your development experience better. Here I gathered all the tricks I've used to make Docker Compose a great development workflow.
 

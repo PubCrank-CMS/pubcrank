@@ -1,14 +1,17 @@
----
-template: post
-draft: false
-categories:
-  - Docker
-  - DX
-title: Syncing User IDs in Your Dev Containers
-description: How to sync user ids in docker so your files have the correct owner.
-date: 2024-10-26T11:00:00.000Z
-cover: /posts/docker-city.jpg
----
+{
+  template: post
+  draft: false
+  categories:
+  [
+    Docker
+    DX
+  ]
+  title: Syncing User IDs in Your Dev Containers
+  description: How to sync user ids in docker so your files have the correct owner.
+  date: 2024-10-26T11:00:00.000Z
+  cover: /posts/docker-city.jpg
+}
+
 
 If you use Docker on Linux (aka Docker Engine) for development without Docker Desktop, as you create new files they will often be owned by the root user and not your account. Of course you can just switch to Docker Desktop but then you lose the native performance of Docker Engine because everything in Docker Desktop is run in a Virtual Machine so that it works the same cross platform.
 

@@ -1,11 +1,14 @@
----
-title:  "Using WeatherKit with Python"
-date:   2022-08-09 00:00:00 -0600
-categories:
-  - python
-  - weatherkit
-  - weather api
----
+{
+  title: Using WeatherKit with Python
+  date: 2022-08-09 00:00:00 -0600
+  categories:
+  [
+    python
+    weatherkit
+    weather api
+  ]
+}
+
 
 Apple bought out the Dark Sky weather company in 2020. They plan on shutting down the Darky Sky API and replacing it with the new WeatherKit service. The WeatherKit service is now in beta and can be used to retrieve weather forecasts and current conditions.
 

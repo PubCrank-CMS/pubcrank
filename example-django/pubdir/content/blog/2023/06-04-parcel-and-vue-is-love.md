@@ -1,14 +1,17 @@
----
-title: Using Vue 3 with Parcel JS
-date: 2023-06-03 00:00:00 -0600
-categories:
-  - vue
-  - parcel
-  - javascript
-  - development
-cover: /img/parcel-vue.jpg
-canonical_url: https://hackernoon.com/using-vue-3-with-parcel-js
----
+{
+  title: Using Vue 3 with Parcel JS
+  date: 2023-06-03 00:00:00 -0600
+  categories:
+  [
+    vue
+    parcel
+    javascript
+    development
+  ]
+  cover: /img/parcel-vue.jpg
+  canonical_url: https://hackernoon.com/using-vue-3-with-parcel-js
+}
+
 
 While all the buzz lately is around the Javascript build tool [Vite](https://vitejs.dev/) especially in the Vue.js community, I still prefer [Parcel](https://parceljs.org/) for building my Vue.js applications. However, getting started with Vue.js and Parcel is a little tricky because most tutorials and docs focus around Vite or other more popular build tools. This article documents how to setup Parcel to build a Vue.js project. But first why would even want to use Parcel?
 

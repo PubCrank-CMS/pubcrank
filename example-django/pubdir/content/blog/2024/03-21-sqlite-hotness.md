@@ -1,15 +1,19 @@
----
-template: post
-draft: false
-title: SQLite the New Hotness?! 🤔
-date: 2024-03-21T05:00:00.000Z
-categories:
-  - Backend
-  - Database
-description: A survey of why SQLite is trending up in many places.
-cover: /img/sqlite-so-hot.jpg
-canonical_url: https://hackernoon.com/sqlite-the-new-hotness
----
+{
+  template: post
+  draft: false
+  title: SQLite the New Hotness?! 🤔
+  date: 2024-03-21T05:00:00.000Z
+  categories:
+  [
+    Backend
+    Database
+  ]
+  description: A survey of why SQLite is trending up in many places.
+  cover: /img/sqlite-so-hot.jpg
+  canonical_url: https://hackernoon.com/sqlite-the-new-hotness
+}
+
+
 SQLite is popping up in many places all the sudden as hot new tech. While it's nowhere near as hot as AI/ML right now, it is amazing that such an old technology is seeing a renaissance.
 
 SQLite is a file based database that was initially released 23 years ago. I often tell other developers it is the fastest database but it just doesn't scale off of one server. However, because it is a file, it's extremely easy to use and also includes many advance features like full text search and GIS. Because of its ease of use, it is used in many places behind the scenes such as web browsers, operating systems, embedded applications, and more.

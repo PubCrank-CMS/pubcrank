@@ -1,13 +1,16 @@
----
-title: Setting the Default Sound Source and Sink on Ubuntu
-date: 2023-09-06 00:00:00 -0600
-categories:
-  - audio
-  - pulse audio
-  - bash
-  - pactl
-cover: /img/pulseaudio.png
----
+{
+  title: Setting the Default Sound Source and Sink on Ubuntu
+  date: 2023-09-06 00:00:00 -0600
+  categories:
+  [
+    audio
+    pulse audio
+    bash
+    pactl
+  ]
+  cover: /img/pulseaudio.png
+}
+
 
 If you're a modern office worker you probably do a lot of video calls and it's really annoying when your default audio and video inputs and outputs change on rebooting your computer. Windows is actually pretty good at remembering your last choice and setting the appropriate defaults on reboot. However, Linux doesn't do anything here, so you're at the mercy of randomness unless you have a script to set the default for you. Below is a script you can add to your startup applications which will set your default audio input and output for systems that use [PulseAudio](https://www.freedesktop.org/wiki/Software/PulseAudio/) like Ubuntu and Debian. It should work on other systems with PulseAudio as well.
 

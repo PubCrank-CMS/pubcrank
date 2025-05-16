@@ -1,14 +1,18 @@
----
-template: post
-categories:
-  - PubCrank
-  - Release
-draft: false
-title: Introducing PubCrank.com
-description: 'Official launch of PubCrank.com, static site editor with rails for non-devs.'
-date: 2024-03-09T06:00:00.000Z
-cover: /img/pubcrank.png
----
+{
+  template: post
+  categories:
+  [
+    PubCrank
+    Release
+  ]
+  draft: false
+  title: Introducing PubCrank.com
+  description: Official launch of PubCrank.com, static site editor with rails for non-devs.
+  date: 2024-03-09T06:00:00.000Z
+  cover: /img/pubcrank.png
+}
+
+
 Today I'm officially releasing [PubCrank.com](https://www.pubcrank.com/)! PubCrank is CMS for static site generators that use Markdown to generate content. It lets a developer setup a static site with guards that can guide content creators and editors to develop content independently. It does this with a simple editor that is configurable with templates that define the fields which can be used for that particular type of content. See the screenshot of the editor below.
 
 ![PubCrank Screenshot](/img/pubcrank-editor.png)
@@ -44,4 +48,3 @@ So try PubCrank today, to start cranking out your content! In case you missed th
 - Try PubCrank today: [https://www.pubcrank.com/](https://www.pubcrank.com/)
 - [Discuss Features and Ideas](https://github.com/pizzapanther/pubcrank-community/discussions)
 - [Report Issues](https://github.com/pizzapanther/pubcrank-community/issues)
-

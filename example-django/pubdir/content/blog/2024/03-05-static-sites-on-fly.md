@@ -1,14 +1,18 @@
----
-title: A Better Template for Your Frontend on Fly.io
-date: 2024-02-04T06:00:00.000Z
-categories:
-  - fly.io
-  - frontend
-cover: /img/server-monolith.jpg
-description: A better way to serve static content on Fly.io
-draft: false
-template: post
----
+{
+  title: A Better Template for Your Frontend on Fly.io
+  date: 2024-02-04T06:00:00.000Z
+  categories:
+  [
+    fly.io
+    frontend
+  ]
+  cover: /img/server-monolith.jpg
+  description: A better way to serve static content on Fly.io
+  draft: false
+  template: post
+}
+
+
 While the [Fly docs](https://fly.io/docs/languages-and-frameworks/static/) have a good example of serving a static frontend, it leaves many details out and misses some features you will probably want if you're deploying anything with a little complexity. This post goes over how you can improve this setup and make it a better developer experience using Fly.io for static frontends.
 
 ## Better Web Server
