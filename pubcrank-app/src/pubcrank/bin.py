@@ -49,8 +49,8 @@ def build(
     sys.exit(1)
 
   setup_django(django_dir, settings)
-  crank = Crank(config)
-  crank.build(outdir, verbose=verbose)
+  crank = Crank(config, verbose=verbose)
+  crank.build(outdir)
 
 if __name__ == '__main__':
   cli.run()

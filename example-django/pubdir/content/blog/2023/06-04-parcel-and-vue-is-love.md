@@ -1,6 +1,6 @@
 {
   title: Using Vue 3 with Parcel JS
-  date: 2023-06-03 00:00:00 -0600
+  date: 2023-06-03 00:00:00-0600
   categories:
   [
     vue

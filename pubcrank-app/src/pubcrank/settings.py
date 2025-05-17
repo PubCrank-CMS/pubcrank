@@ -1,3 +1,9 @@
+from pubcrank.serialize import DateTimeSerializer
+
+FIELD_SERIALIZERS = {
+  'forms.DateTimeField': DateTimeSerializer
+}
+
 def setup_pubcrank(settings, pubdir, theme):
   settings['PUBCRANK_DIR'] = pubdir
   settings['PUBCRANK_THEME'] = theme
@@ -15,5 +21,6 @@ def setup_pubcrank(settings, pubdir, theme):
     },
   })
 
-  if 'PUBCRANK_MD_EXTRAS' not in settings:
-    settings['PUBCRANK_MD_EXTRAS'] = ["fenced-code-blocks", "footnotes", "tables", "strike"]
+  settings['PUBCRANK_MD_EXTRAS'] = ["fenced-code-blocks", "footnotes", "tables", "strike"]
+  settings['PUBCRANK_FIELD_SERIALIZERS'] = FIELD_SERIALIZERS
+  settings['PUBCRANK_PER_PAGE'] = 5

@@ -1,6 +1,6 @@
 {
   title: Android Privacy Protocol
-  date: 2021-07-06 20:00:00 -0600
+  date: 2021-07-06 20:00:00-0600
   categories: [
     android,
     privacy,

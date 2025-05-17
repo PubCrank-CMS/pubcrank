@@ -1,6 +1,6 @@
 {
   title: Live Streaming Setup for Small/Medium Churches
-  date: 2021-12-28 20:00:00 -0600
+  date: 2021-12-28 20:00:00-0600
   categories: [
     church,
     audio,

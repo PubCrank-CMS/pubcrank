@@ -10,13 +10,16 @@ import markdown2
 from rich.console import Console
 
 from pubcrank.lib.frontmatter import HJSONHandler
+from pubcrank.pagination import load_pagination
 
 econsole = Console(stderr=True, style="bold red")
 console = Console()
 
 
 class Crank:
-  def __init__(self, config):
+  def __init__(self, config, verbose=False):
+    self.verbose = verbose
+
     with config.open('r') as fh:
       self.config = hjson.loads(fh.read())
 
@@ -39,14 +42,14 @@ class Crank:
   def no_access(self, error):
     econsole.print(f'Can not access: {error.filename}')
 
-  def log(self, message, verbose=False):
-    if verbose:
+  def log(self, message):
+    if self.verbose:
       console.print(message)
 
   def success(self, message):
     console.print(message, style="green")
 
-  def build(self, outdir, verbose=False):
+  def build(self, outdir):
     for root, dirs, files in self.content_dir.walk(on_error=self.no_access):
       for f in files:
         file = root / f
@@ -54,7 +57,6 @@ class Crank:
           relpath = file.relative_to(self.content_dir)
           outpath = outdir / relpath
           outpath = outpath.with_suffix('.html')
-          self.log(f"Building: {file} -> {outpath}", verbose)
           self.generate(file, outpath)
 
     self.success(f"Successful build at: {outdir.resolve()}")
@@ -66,9 +68,23 @@ class Crank:
         tpl_path = self.theme_dir / tpl_file
 
       with tpl_path.open('r') as fh:
-        self.tpl_cache[tpl_file] = Template(fh.read(), engine=self.tpl_engine)
+        tpl = Template(fh.read(), engine=self.tpl_engine)
+
+      meta_path = tpl_path.with_suffix('.hjson')
+      metadata = {}
+      if meta_path.exists():
+        with meta_path.open('r') as fh:
+          metadata = hjson.loads(fh.read())
+
+      self.tpl_cache[tpl_file] = (tpl, metadata)
 
     return self.tpl_cache[tpl_file]
+
+  def hydrate_metadata(self, meta, tmeta):
+    for field in tmeta.get('fields', []):
+      key = field['name']
+      if key in meta and field['type'] in settings.PUBCRANK_FIELD_SERIALIZERS:
+        meta[key] = settings.PUBCRANK_FIELD_SERIALIZERS[field['type']].from_json(meta[key])
 
   def open_content(self, file):
     key = file.resolve()
@@ -78,13 +94,24 @@ class Crank:
     with file.open('r') as fh:
       metadata, content = frontmatter.parse(fh.read(), handler=HJSONHandler())
 
-    self.content_cache[key] = (metadata, content)
+    template, template_metadata = self.get_template(metadata.get('template', 'page.html'))
+    self.hydrate_metadata(metadata, template_metadata)
+
+    self.content_cache[key] = (metadata, content, template)
     return self.content_cache[key]
 
-  def generate(self, src, dest):
-    metadata, content = self.open_content(src)
+  def write_output(self, context, template):
+    self.log(f"Writing: {context['src']} -> {context['dest']}")
+    context = Context(context)
+    html = template.render(context)
 
-    template = self.get_template(metadata.get('template', 'page.html'))
+    context['dest'].parent.mkdir(parents=True, exist_ok=True)
+    with context['dest'].open('w') as fh:
+      fh.write(html)
+
+  def generate(self, src, dest):
+    metadata, content, template = self.open_content(src)
+
     context = deepcopy(self.config)
     context['src'] = src
     context['dest'] = dest
@@ -94,9 +121,18 @@ class Crank:
     content = markdown2.markdown(content, extras=settings.PUBCRANK_MD_EXTRAS)
     page.update({'body': content})
     context.update({'page': page})
-    context = Context(context)
-    html = template.render(context)
 
-    dest.parent.mkdir(parents=True, exist_ok=True)
-    with dest.open('w') as fh:
-      fh.write(html)
+    if 'paginate' in metadata:
+      paginator = load_pagination(context, **metadata['paginate'])
+
+      for p in paginator.page_range:
+        page = paginator.page(p)
+        pdest = context['dest'].parent / 'page' / str(page.number) / 'index.html'
+        print(pdest)
+        pcontext = deepcopy(context)
+        pcontext['dest'] = pdest
+        pcontext['pagination'] = page
+        self.write_output(pcontext, template)
+
+    else:
+      self.write_output(context, template)

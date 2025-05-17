@@ -1,6 +1,6 @@
 {
   title: Setting the Default Sound Source and Sink on Ubuntu
-  date: 2023-09-06 00:00:00 -0600
+  date: 2023-09-06 00:00:00-0600
   categories:
   [
     audio

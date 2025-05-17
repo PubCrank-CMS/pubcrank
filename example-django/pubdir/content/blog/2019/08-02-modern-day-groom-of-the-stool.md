@@ -1,6 +1,6 @@
 {
   title: Voice Assistants are the Modern Day Groom of the Stool
-  date: 2019-08-02 20:00:00 -0600
+  date: 2019-08-02 20:00:00-0600
   categories: [
     tech,
     voice,

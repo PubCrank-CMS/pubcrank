@@ -1,6 +1,6 @@
 {
   title: "Leaking as a Feature"
-  date: 2021-05-10 20:00:00 -0600
+  date: 2021-05-10 20:00:00-0600
   categories: [
     biking,
     tires,

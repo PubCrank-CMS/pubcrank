@@ -1,6 +1,6 @@
 {
   title: Installing Tmux plugins on Ubuntu
-  date: 2023-08-14 00:00:00 -0600
+  date: 2023-08-14 00:00:00-0600
   categories:
   [
     tmux

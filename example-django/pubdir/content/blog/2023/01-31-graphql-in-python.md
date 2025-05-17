@@ -1,6 +1,6 @@
 {
   title: Making GraphQL Queries in Python Like a Boss
-  date: 2023-01-31 00:00:00 -0600
+  date: 2023-01-31 00:00:00-0600
   categories:
   [
     python
