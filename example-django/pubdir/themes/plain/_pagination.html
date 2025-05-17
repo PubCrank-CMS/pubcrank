@@ -1,0 +1,21 @@
+<ul>
+  {% for obj in pagination.object_list %}
+  <li>{{ obj.0 }}<li>
+  {% endfor %}
+</ul>
+<div>
+  <span>Page {{ pagination.number }} of {{ pagination.paginator.num_pages }}</span>
+  {% if pagination.has_previous %}
+  <span>
+    <a href="">&laquo; Previous</a>
+  </span>
+  {% endif %}
+  {% if pagination.has_previous and pagination.has_next %}
+  <span>-</span>
+  {% endif %}
+  {% if pagination.has_next %}
+  <span>
+    <a href="">Next &raquo;</a>
+  </span>
+  {% endif %}
+</div>
