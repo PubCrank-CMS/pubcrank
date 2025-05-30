@@ -26,6 +26,7 @@ Add PubCrank Settings:
 ```python
 from pubcrank.settings import setup_pubcrank
 
+# setup_pubcrank(globals(), pubcrank_dir_path, theme)
 setup_pubcrank(globals(), BASE_DIR / 'pubdir', 'plain')
 ```
 
