@@ -5,15 +5,21 @@ description = "PubCrank CMS CLI"
 authors = [
     {name = "Paul Bailey", email = "paul@neutron.studio"},
 ]
-dependencies = []
+dependencies = ["pubcrank-django-app>=0.2.0", "django>=5.2.1"]
 requires-python = ">=3.13"
 readme = "README.md"
 license = {text = "BSD 3-Clause"}
+
+[project.scripts]
+pubcrank = "pubcrank_cli.main:run"
 
 [build-system]
 requires = ["pdm-backend"]
 build-backend = "pdm.backend"
 
-
 [tool.pdm]
 distribution = true
+
+[tool.pdm.scripts]
+_.env_file = ".env"
+pubcrank = "python src/pubcrank_cli/main.py"
