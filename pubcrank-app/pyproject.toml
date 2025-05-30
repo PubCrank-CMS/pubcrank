@@ -1,6 +1,6 @@
 [project]
 name = "pubcrank-django-app"
-version = "0.2.0"
+version = "0.3.0"
 description = "PubCrank CMS Django App"
 authors = [
     {name = "Paul Bailey", email = "paul@neutron.studio"},
