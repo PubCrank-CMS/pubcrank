@@ -1,7 +1,10 @@
-from pubcrank.bin import cli
+import sys
+
+from pubcrank.bin import generate_cli
 
 def run():
-  cli.run()
+  generate_cli.run()
+
 
 if __name__ == '__main__':
   run()
