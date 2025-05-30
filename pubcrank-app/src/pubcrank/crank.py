@@ -52,9 +52,26 @@ class Crank:
     console.print(message, style="green")
 
   def clear(self, outdir):
+    if self.verbose:
+      self.log(f"Clearing: {outdir}")
+
     shutil.rmtree(outdir, ignore_errors=True)
 
-  def build(self, outdir):
+  def copy_assets(self, srcdir, outdir):
+    if srcdir.exists():
+      outdir.mkdir(parents=True, exist_ok=True)
+      if self.verbose:
+        self.log(f"Copying Assets: {srcdir}")
+
+      shutil.copytree(srcdir, outdir, symlinks=True, dirs_exist_ok=True)
+
+  def build(self, outdir, noclear=False):
+    if not noclear:
+      self.clear(outdir)
+
+    self.copy_assets(self.theme_assets_dir, outdir)
+    self.copy_assets(self.assets_dir, outdir)
+
     for root, dirs, files in self.content_dir.walk(on_error=self.no_access):
       for f in files:
         file = root / f
@@ -64,7 +81,7 @@ class Crank:
           outpath = outpath.with_suffix('.html')
           self.generate(file, outpath)
 
-    self.success(f"Successful build at: {outdir.resolve()}")
+    self.success(f"Successful build: {outdir.resolve()}")
 
   def get_template(self, tpl_file):
     if tpl_file not in self.tpl_cache:

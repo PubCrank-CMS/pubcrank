@@ -52,10 +52,7 @@ def build(
 
   setup_django(django_dir, settings)
   crank = Crank(config, baseurl, verbose=verbose)
-  if not noclear:
-    crank.clear(outdir)
-
-  crank.build(outdir)
+  crank.build(outdir, noclear=noclear)
 
 if __name__ == '__main__':
   cli.run()
