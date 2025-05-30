@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}{{ page.title }} - {{ site.name }}{% endblock %}</title>
     <meta name="description" content="{{ page.description }}">
-    <link rel="icon" href="/pubcrank.png">
+    <link rel="icon" href="{{ baseurl }}pubcrank.png">
     {% block head %}{% endblock %}
   </head>
   <body>
+    <nav>
+      {% for n in site.nav %}
+      <a href="{{ n.url }}">{{ n.name }}</a>{% if not forloop.last %}&nbsp; - &nbsp;{% endif %}
+      {% endfor %}
+    </nav>
     {% block content %}{% endblock %}
   </body>
 </html>

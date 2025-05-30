@@ -1,5 +1,6 @@
 from copy import deepcopy
 from pathlib import Path
+import shutil
 
 from django.template import Context, Template, engines
 from django.conf import settings
@@ -17,8 +18,9 @@ console = Console()
 
 
 class Crank:
-  def __init__(self, config, verbose=False):
+  def __init__(self, config, baseurl, verbose=False):
     self.verbose = verbose
+    self.baseurl = baseurl
 
     with config.open('r') as fh:
       self.config = hjson.loads(fh.read())
@@ -48,6 +50,9 @@ class Crank:
 
   def success(self, message):
     console.print(message, style="green")
+
+  def clear(self, outdir):
+    shutil.rmtree(outdir, ignore_errors=True)
 
   def build(self, outdir):
     for root, dirs, files in self.content_dir.walk(on_error=self.no_access):
@@ -113,6 +118,8 @@ class Crank:
     metadata, content, template = self.open_content(src)
 
     context = deepcopy(self.config)
+    context['baseurl'] = self.baseurl
+    context['_crank'] = self
     context['src'] = src
     context['dest'] = dest
     context['crank'] = self
@@ -128,11 +135,14 @@ class Crank:
       for p in paginator.page_range:
         page = paginator.page(p)
         pdest = context['dest'].parent / 'page' / str(page.number) / 'index.html'
-        print(pdest)
         pcontext = deepcopy(context)
         pcontext['dest'] = pdest
         pcontext['pagination'] = page
         self.write_output(pcontext, template)
+        if p == 1:
+          pdest = context['dest'].parent / 'index.html'
+          pcontext['dest'] = pdest
+          self.write_output(pcontext, template)
 
     else:
       self.write_output(context, template)

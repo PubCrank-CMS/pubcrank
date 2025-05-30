@@ -9,13 +9,13 @@ import frontmatter
 
 def meta_sort_key(sortby):
   def sort_key(item):
-    return item[1][sortby]
+    return item['metadata'][sortby]
 
   return sort_key
 
 
 def file_sort_key(item):
-  return item[0].resolve().lower()
+  return item['file'].resolve().lower()
 
 
 def load_pagination(context, listdir=".", recursive=True, sortby='-date'):
@@ -33,13 +33,13 @@ def load_pagination(context, listdir=".", recursive=True, sortby='-date'):
         file = root / f
         if f.lower() != 'index.md' and file.suffix.lower() == '.md':
           metadata, content, template = context['crank'].open_content(file)
-          to_process.append((file, metadata))
+          to_process.append({'file': file, 'metadata': metadata})
 
   else:
     for file in listdir.iterdir():
       if file.name.lower() != 'index.md' and file.is_file() and file.suffix.lower() == '.md':
         metadata, content = context['crank'].open_content(file)
-        to_process.append((file, metadata))
+        to_process.append({'file': file, 'metadata': metadata})
 
   reverse = False
   if sortby.startswith('-'):

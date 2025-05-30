@@ -38,6 +38,8 @@ def build(
   django_dir: Path = DjangoOption,
   settings: str = SettingsOption,
   verbose: bool = VerboseOption,
+  baseurl: str = Option("/", "--base-url", help="base URL for site"),
+  noclear: bool = Option(False, "--no-clear", help="disable clear directory before building"),
   outdir: Path = Option(Path('output'), "-o", "--output", help="output directory", raise_path_does_not_exist=False)
 ):
   if not config.exists():
@@ -49,7 +51,10 @@ def build(
     sys.exit(1)
 
   setup_django(django_dir, settings)
-  crank = Crank(config, verbose=verbose)
+  crank = Crank(config, baseurl, verbose=verbose)
+  if not noclear:
+    crank.clear(outdir)
+
   crank.build(outdir)
 
 if __name__ == '__main__':

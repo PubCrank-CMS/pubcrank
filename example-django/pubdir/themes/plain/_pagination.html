@@ -1,13 +1,15 @@
-<ul>
+<ul>{% load pubcrank %}
   {% for obj in pagination.object_list %}
-  <li>{{ obj.0 }}<li>
+  <li>
+    <a href="{% page_url obj %}">{{ obj.metadata.title }}</a>
+  </li>
   {% endfor %}
 </ul>
 <div>
   <span>Page {{ pagination.number }} of {{ pagination.paginator.num_pages }}</span>
   {% if pagination.has_previous %}
   <span>
-    <a href="">&laquo; Previous</a>
+    <a href="{{ baseurl }}blog/page/{{ pagination.previous_page_number }}/">&laquo; Previous</a>
   </span>
   {% endif %}
   {% if pagination.has_previous and pagination.has_next %}
@@ -15,7 +17,7 @@
   {% endif %}
   {% if pagination.has_next %}
   <span>
-    <a href="">Next &raquo;</a>
+    <a href="{{ baseurl }}blog/page/{{ pagination.next_page_number }}/">Next &raquo;</a>
   </span>
   {% endif %}
 </div>
