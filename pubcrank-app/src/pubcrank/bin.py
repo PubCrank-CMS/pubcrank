@@ -51,8 +51,11 @@ def generate_cli(**defaults):
       eprint("Output must be a directory.")
       sys.exit(1)
 
+    os.environ['PUBCRANK_DIR'] = str(config.parent)
+    config_obj = Crank.parse_config(config)
+    os.environ['PUBCRANK_THEME'] = config_obj['theme']
     setup_django(django_dir, settings)
-    crank = Crank(config, baseurl, verbose=verbose)
+    crank = Crank(config_obj, config.parent, baseurl, verbose=verbose)
     crank.build(outdir, noclear=noclear)
 
   return cli

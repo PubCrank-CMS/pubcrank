@@ -18,14 +18,17 @@ console = Console()
 
 
 class Crank:
-  def __init__(self, config, baseurl, verbose=False):
+  @staticmethod
+  def parse_config(config):
+    with config.open('r') as fh:
+      return hjson.loads(fh.read())
+
+  def __init__(self, config, pubdir, baseurl, verbose=False):
     self.verbose = verbose
     self.baseurl = baseurl
+    self.config = config
 
-    with config.open('r') as fh:
-      self.config = hjson.loads(fh.read())
-
-    self.dir = config.parent
+    self.dir = pubdir
 
     self.content_dir = self.dir / "content"
     self.templates_dir = self.dir / "templates"

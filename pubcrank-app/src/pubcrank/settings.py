@@ -1,10 +1,17 @@
+import os
+from pathlib import Path
+
 from pubcrank.serialize import DateTimeSerializer
 
 FIELD_SERIALIZERS = {
   'forms.DateTimeField': DateTimeSerializer
 }
 
-def setup_pubcrank(settings, pubdir, theme):
+def setup_pubcrank(
+    settings,
+    pubdir=Path(os.environ.get('PUBCRANK_DIR', '.')),
+    theme=os.environ.get('PUBCRANK_THEME')
+  ):
   settings['PUBCRANK_DIR'] = pubdir
   settings['PUBCRANK_THEME'] = theme
   settings['TEMPLATES'].append({
