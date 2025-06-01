@@ -24,5 +24,21 @@ mysite/content:
 about.md  blog/  index.md
 
 mysite/themes:
-plain
+plain/
+```
+
+### Configuration
+
+```hjson
+{
+  site: {
+    name: Example Site
+    nav: [
+      {name: "Home", url: "/"}
+      {name: "Blog", url: "/blog/"}
+      {name: "About", url: "/about.html"}
+    ]
+  }
+  theme: "plain"
+}
 ```
