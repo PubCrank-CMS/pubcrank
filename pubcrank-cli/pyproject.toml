@@ -5,7 +5,7 @@ description = "PubCrank CMS CLI"
 authors = [
     {name = "Paul Bailey", email = "paul@neutron.studio"},
 ]
-dependencies = ["django>=5.2.1"]
+dependencies = ["django>=5.2.1", "pubcrank-django-app>=0.4.0"]
 requires-python = ">=3.13"
 readme = "README.md"
 license = {text = "BSD 3-Clause"}
@@ -23,3 +23,7 @@ distribution = true
 [tool.pdm.scripts]
 _.env_file = ".env"
 
+[tool.pdm.dev-dependencies]
+dev = [
+    "-e file:///${PROJECT_ROOT}/../pubcrank-app#egg=pubcrank-django-app",
+]
