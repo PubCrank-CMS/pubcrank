@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:82ec162eedd8ada9c59480a710d54139f5c873bea90913a0beb85ec150620462"
+content_hash = "sha256:8248a9ccd068fa63dcf411afe77700727f6c360b793b4d95aee46866ef0b9e4e"
 
 [[metadata.targets]]
 requires_python = ">=3.13"
@@ -158,7 +158,7 @@ files = [
 
 [[package]]
 name = "pubcrank-django-app"
-version = "0.4.0"
+version = "0.5.0"
 requires_python = ">=3.13"
 editable = true
 path = "../pubcrank-app"
