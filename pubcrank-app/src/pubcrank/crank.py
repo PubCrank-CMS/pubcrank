@@ -145,6 +145,7 @@ class Crank:
     context['crank'] = self
 
     page = metadata
+    page.update({'body_raw': content})
     content = markdown2.markdown(content, extras=settings.PUBCRANK_MD_EXTRAS)
     page.update({'body': content})
     context.update({'page': page})
