@@ -17,6 +17,7 @@ distribution = false
 [tool.pdm.scripts]
 _.env_file = ".env"
 pubcrank = "python ../pubcrank-app/src/pubcrank/bin.py"
+buildsite = "pubcrank build -c pubdir/pubcrank.hjson -s pubsite.settings"
 
 [tool.pdm.dev-dependencies]
 dev = [
