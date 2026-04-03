@@ -58,7 +58,8 @@ class Crank:
     if self.verbose:
       self.log(f"Clearing: {outdir}")
 
-    shutil.rmtree(outdir, ignore_errors=True)
+    for child in outdir.iterdir():
+      shutil.rmtree(child, ignore_errors=True)
 
   def copy_assets(self, srcdir, outdir):
     if srcdir.exists():
