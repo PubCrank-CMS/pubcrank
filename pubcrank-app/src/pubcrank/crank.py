@@ -69,6 +69,11 @@ class Crank:
 
       shutil.copytree(srcdir, outdir, symlinks=True, dirs_exist_ok=True)
 
+  def copy_asset(self, srcdir, relpath, outdir):
+    outpath = outdir / relpath
+    outpath.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(srcdir / relpath, outpath, follow_symlinks=True)
+
   def build(self, outdir, noclear=False):
     if not noclear:
       self.clear(outdir)
@@ -79,11 +84,14 @@ class Crank:
     for root, dirs, files in self.content_dir.walk(on_error=self.no_access):
       for f in files:
         file = root / f
+        relpath = file.relative_to(self.content_dir)
         if file.suffix.lower() == '.md':
-          relpath = file.relative_to(self.content_dir)
           outpath = outdir / relpath
           outpath = outpath.with_suffix('.html')
           self.generate(file, outpath)
+
+        else:
+          self.copy_asset(self.content_dir, relpath, outdir)
 
     self.success(f"Successful build: {outdir.resolve()}")
 

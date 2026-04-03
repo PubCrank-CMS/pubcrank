@@ -1,6 +1,6 @@
 [project]
 name = "pubcrank-cli"
-version = "0.6.0"
+version = "0.7.0"
 description = "PubCrank CMS CLI"
 authors = [
     {name = "Paul Bailey", email = "paul@neutron.studio"},
