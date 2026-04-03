@@ -158,7 +158,7 @@ files = [
 
 [[package]]
 name = "pubcrank-django-app"
-version = "0.7.0"
+version = "0.8.0"
 requires_python = ">=3.13"
 editable = true
 path = "../pubcrank-app"
