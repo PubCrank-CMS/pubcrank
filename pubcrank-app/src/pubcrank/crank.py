@@ -18,6 +18,8 @@ console = Console()
 
 
 class Crank:
+  DEFAULT_TEMPLATE = 'page.html'
+
   @staticmethod
   def parse_config(config):
     with config.open('r') as fh:
@@ -87,7 +89,6 @@ class Crank:
         relpath = file.relative_to(self.content_dir)
         if file.suffix.lower() == '.md':
           outpath = outdir / relpath
-          outpath = outpath.with_suffix('.html')
           self.generate(file, outpath)
 
         else:
@@ -128,7 +129,7 @@ class Crank:
     with file.open('r') as fh:
       metadata, content = frontmatter.parse(fh.read(), handler=HJSONHandler())
 
-    template, template_metadata = self.get_template(metadata.get('template', 'page.html'))
+    template, template_metadata = self.get_template(metadata.get('template', self.DEFAULT_TEMPLATE))
     self.hydrate_metadata(metadata, template_metadata)
 
     self.content_cache[key] = (metadata, content, template)
@@ -145,6 +146,9 @@ class Crank:
 
   def generate(self, src, dest):
     metadata, content, template = self.open_content(src)
+    tpl = metadata.get('template', self.DEFAULT_TEMPLATE)
+    ext = Path(tpl).suffix
+    dest = dest.with_suffix(ext)
 
     context = deepcopy(self.config)
     context['baseurl'] = self.baseurl
