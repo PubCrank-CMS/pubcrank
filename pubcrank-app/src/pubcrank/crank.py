@@ -150,6 +150,7 @@ class Crank:
     ext = Path(tpl).suffix
     dest = dest.with_suffix(ext)
 
+    name = dest.name
     context = deepcopy(self.config)
     context['baseurl'] = self.baseurl
     context['_crank'] = self
@@ -168,13 +169,13 @@ class Crank:
 
       for p in paginator.page_range:
         page = paginator.page(p)
-        pdest = context['dest'].parent / 'page' / str(page.number) / 'index.html'
+        pdest = context['dest'].parent / 'page' / str(page.number) / name
         pcontext = deepcopy(context)
         pcontext['dest'] = pdest
         pcontext['pagination'] = page
         self.write_output(pcontext, template)
         if p == 1:
-          pdest = context['dest'].parent / 'index.html'
+          pdest = context['dest'].parent / name
           pcontext['dest'] = pdest
           self.write_output(pcontext, template)
 
