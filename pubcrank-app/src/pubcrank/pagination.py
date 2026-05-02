@@ -33,13 +33,19 @@ def load_pagination(context, listdir=".", recursive=True, sortby='-date'):
         file = root / f
         if f.lower() != 'index.md' and file.suffix.lower() == '.md':
           metadata, content, template = context['crank'].open_content(file)
-          to_process.append({'file': file, 'metadata': metadata})
+          to_process.append({
+            'file': file,
+            'metadata': metadata
+          })
 
   else:
     for file in listdir.iterdir():
       if file.name.lower() != 'index.md' and file.is_file() and file.suffix.lower() == '.md':
         metadata, content = context['crank'].open_content(file)
-        to_process.append({'file': file, 'metadata': metadata})
+        to_process.append({
+          'file': file,
+          'metadata': metadata
+        })
 
   reverse = False
   if sortby.startswith('-'):

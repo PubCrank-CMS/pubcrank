@@ -89,7 +89,7 @@ class Crank:
         relpath = file.relative_to(self.content_dir)
         if file.suffix.lower() == '.md':
           outpath = outdir / relpath
-          self.generate(file, outpath)
+          self.generate(file, outpath, outdir)
 
         else:
           self.copy_asset(self.content_dir, relpath, outdir)
@@ -144,7 +144,7 @@ class Crank:
     with context['dest'].open('w') as fh:
       fh.write(html)
 
-  def generate(self, src, dest):
+  def generate(self, src, dest, outdir):
     metadata, content, template = self.open_content(src)
     tpl = metadata.get('template', self.DEFAULT_TEMPLATE)
     ext = Path(tpl).suffix
@@ -156,6 +156,7 @@ class Crank:
     context['_crank'] = self
     context['src'] = src
     context['dest'] = dest
+    context['dest_rel'] = dest.relative_to(outdir)
     context['crank'] = self
 
     page = metadata
@@ -172,6 +173,7 @@ class Crank:
         pdest = context['dest'].parent / 'page' / str(page.number) / name
         pcontext = deepcopy(context)
         pcontext['dest'] = pdest
+        pcontext['dest_rel'] = pdest.relative_to(outdir)
         pcontext['pagination'] = page
         self.write_output(pcontext, template)
         if p == 1:
