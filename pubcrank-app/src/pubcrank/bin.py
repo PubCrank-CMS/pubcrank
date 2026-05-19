@@ -54,6 +54,10 @@ def generate_cli(**defaults):
     os.environ['PUBCRANK_DIR'] = str(config.parent)
     config_obj = Crank.parse_config(config)
     os.environ['PUBCRANK_THEME'] = config_obj['theme']
+    extra_settings = config_obj.get('extra_settings')
+    if extra_settings:
+      os.environ['PUBCRANK_EXTRA_SETTINGS'] = str(config.parent / extra_settings)
+
     setup_django(django_dir, settings)
     crank = Crank(config_obj, config.parent, baseurl, verbose=verbose)
     crank.build(outdir, noclear=noclear)
